@@ -19,20 +19,48 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+args=$(getopt h $*)
+
+function usage {
+    echo "Usage: $0 [-h] script.sh target.app"
+    exit 2
+}
+
+if [ $? != 0 ]; then
+    usage
+fi
+
+set -- $args
+for i ; do
+    case "$i"
+    in
+        -h) usage ; shift ;;
+        --) shift ; break ;;
+    esac
+done
+
+if [ $# != 2 ]; then
+    usage
+fi
+
 SCRIPT=$1
 TARGET=$2
 
 if [ -d "$TARGET" ]; then
     echo "$TARGET exists, exiting" 1>&2
-    exit 1
+    exit 3
 fi
 
 SCRIPTSIZE=$(ls -l "$SCRIPT" | awk '{print $5}')
 
 if [ $SCRIPTSIZE -lt 28 ]; then
-    echo -e "Please pad your script to at least 28 bytes; Mac OS X will not\nrecognize scripts that are smaller than this value." 1>&2
-    exit 2
+    echo -e "Script smaller than size allowed by OS. Please pad to 28 characters." 1>&2
+    exit 4
 fi
+
+#
+# done checking args; create the app
+#
 
 mkdir -p "$TARGET/Contents/MacOS"
 mkdir -p "$TARGET/Contents/Resources"
