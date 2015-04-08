@@ -21,7 +21,7 @@
 args=$(getopt h $*)
 
 function usage {
-    echo "Usage: $0 [-h] <script.sh> <target.app>"
+    echo "Usage: $0 [-h] <script.sh> <target.app> [<icons.icns>]"
     exit 2
 }
 
@@ -38,12 +38,13 @@ for i ; do
     esac
 done
 
-if [ $# != 2 ]; then
+if [ $# -lt 2 -o $# -gt 3 ]; then
     usage
 fi
 
 SCRIPT=$1
 TARGET=$2
+ICON=$3
 
 BASENAME=`basename "$SCRIPT"`
 
@@ -54,6 +55,11 @@ fi
 
 if [ -e "$TARGET" ]; then
     echo "$TARGET exists!" 1>&2
+    exit 3
+fi
+
+if [ -n "$ICON" -a ! -r "$ICON" ]; then
+    echo "$ICON isn't readable!" 1>&2
     exit 3
 fi
 
@@ -90,6 +96,17 @@ cat <<EOF >"$TARGET/Contents/Info.plist"
     <string>????</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
+EOF
+
+if [ -n "$ICON" ]; then
+    cat <<EOF >>"$TARGET/Contents/Info.plist"
+    <key>CFBundleIconFile</key>
+    <string>app.icns</string>
+EOF
+    cp "$ICON" "$TARGET/Contents/Resources/app.icns" || exit 1
+fi
+
+cat <<EOF >>"$TARGET/Contents/Info.plist"
 </dict>
 </plist>
 EOF
