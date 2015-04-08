@@ -63,6 +63,8 @@ fi
 
 mkdir -p "$TARGET/Contents/MacOS"
 mkdir -p "$TARGET/Contents/Resources"
+umask 0022
+
 
 cat <<EOF >"$TARGET/Contents/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
