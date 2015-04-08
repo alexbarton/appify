@@ -43,6 +43,8 @@ fi
 SCRIPT=$1
 TARGET=$2
 
+BASENAME=`basename "$SCRIPT"`
+
 if [ -e "$TARGET" ]; then
     echo "$TARGET exists, exiting" 1>&2
     exit 3
@@ -68,7 +70,7 @@ cat <<EOF >"$TARGET/Contents/Info.plist"
 <plist version="1.0">
 <dict>
     <key>CFBundleExecutable</key>
-    <string>run.sh</string>
+    <string>${BASENAME}</string>
     <key>CFBundleIconFile</key>
     <string></string>
     <key>CFBundleInfoDictionaryVersion</key>
@@ -83,5 +85,5 @@ cat <<EOF >"$TARGET/Contents/Info.plist"
 </plist>
 EOF
 
-cp "$SCRIPT" "$TARGET/Contents/MacOS/run.sh"
-chmod 755 "$TARGET/Contents/MacOS/run.sh"
+cp "$SCRIPT" "$TARGET/Contents/MacOS/$BASENAME"
+chmod 755 "$TARGET/Contents/MacOS/$BASENAME"
