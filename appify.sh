@@ -19,7 +19,7 @@
 args=$(getopt h $*)
 
 function usage {
-    echo "Usage: $0 [-h] script.sh target.app"
+    echo "Usage: $0 [-h] <script.sh> <target.app>"
     exit 2
 }
 
