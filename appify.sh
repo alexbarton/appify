@@ -1,7 +1,9 @@
 #!/bin/bash
 #
-# appify -- convert your non-interactive shell script into a Mac OS X application
+# appify -- convert non-interactive shell script into Mac OS X applications
 # Copyright (C) 2010  Adam Backstrom
+# Copyright (C) 2015  Alexander Barton <alex@barton.de>
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
