@@ -43,7 +43,7 @@ fi
 SCRIPT=$1
 TARGET=$2
 
-if [ -d "$TARGET" ]; then
+if [ -e "$TARGET" ]; then
     echo "$TARGET exists, exiting" 1>&2
     exit 3
 fi
