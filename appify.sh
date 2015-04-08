@@ -47,8 +47,13 @@ TARGET=$2
 
 BASENAME=`basename "$SCRIPT"`
 
+if [ ! -r "$SCRIPT" ]; then
+    echo "$SCRIPT isn't readable!" 1>&2
+    exit 3
+fi
+
 if [ -e "$TARGET" ]; then
-    echo "$TARGET exists, exiting" 1>&2
+    echo "$TARGET exists!" 1>&2
     exit 3
 fi
 
