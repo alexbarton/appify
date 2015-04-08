@@ -61,10 +61,10 @@ fi
 # done checking args; create the app
 #
 
-mkdir -p "$TARGET/Contents/MacOS"
-mkdir -p "$TARGET/Contents/Resources"
 umask 0022
 
+mkdir -p "$TARGET/Contents/MacOS" || exit 1
+mkdir -p "$TARGET/Contents/Resources" || exit 1
 
 cat <<EOF >"$TARGET/Contents/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -87,5 +87,5 @@ cat <<EOF >"$TARGET/Contents/Info.plist"
 </plist>
 EOF
 
-cp "$SCRIPT" "$TARGET/Contents/MacOS/$BASENAME"
-chmod 755 "$TARGET/Contents/MacOS/$BASENAME"
+cp "$SCRIPT" "$TARGET/Contents/MacOS/$BASENAME" || exit 1
+chmod 755 "$TARGET/Contents/MacOS/$BASENAME" || exit 1
