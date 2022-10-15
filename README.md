@@ -15,5 +15,5 @@ Homepage
 Git Repository
 --------------
 
- - <http://git.abackstrom.com/appify.git> (Original home)
+ - <http://git.abackstrom.com/appify.git> (Original home, no longer exists?)
  - <http://github.com/alexbarton/appify.git> (Alex' repository)
